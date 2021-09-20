@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import backIcon from '../assets/images/icon-arrow-left.svg'
 import InvoiceDetailsHeader from './InvoiceDetailsHeader';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 // remove this after adding DB
 import data from '../data.json'
 import InvoiceCardDetails from './InvoiceCardDetails';
@@ -17,6 +17,7 @@ const InvoiceDetails = (props) => {
     }
     useEffect(() => {
         filterInvoice()
+        // eslint-disable-next-line
     }, [])
 
     return (

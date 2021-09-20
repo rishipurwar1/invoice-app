@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm, Controller } from "react-hook-form";
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import Label from './Label';
 import Input from './Input';
 import ItemList from './ItemList';
-import { useDispatch } from 'react-redux';
-import { createInvoice } from '../actions/invoices';
+// import { useDispatch } from 'react-redux';
+// import { createInvoice } from '../actions/invoices';
 
 const CreateInvoice = ({ openForm, setOpenForm }) => {
     const { register, control, handleSubmit } = useForm();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const onSubmit = data => {
         console.log(data);

@@ -1,7 +1,8 @@
 import React from 'react'
 import InvoiceCard from './InvoiceCard'
 import data from '../data.json'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
+
 
 const Invoices = () => {
     // const invoices = useSelector((state) => state.invoices);
@@ -12,5 +13,4 @@ const Invoices = () => {
         </div>
     )
 }
-
-export default Invoices
+export default Invoices;
