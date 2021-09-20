@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.content-area {
+    height: calc(100% - theme('spacing.24'));
+  }
+
+@layer utilities {
+  .border-spacing-px {
+    border-spacing: 0px;
+  }
+}
