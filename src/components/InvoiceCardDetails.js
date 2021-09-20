@@ -2,7 +2,6 @@ import React from 'react'
 import moment from 'moment'
 
 const InvoiceCardDetails = ({ data }) => {
-    console.log(data);
     if (data.length > 0) {
         return (
             <div className="bg-primaryOne rounded-md mt-6 p-6">
@@ -63,14 +62,14 @@ const InvoiceCardDetails = ({ data }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data[0].items.map(item => (
-                                <tr key={item.id}>
-                                    <td className="text-left pl-6 pb-6 text-neutral font-medium text-xs" key={item.id}>{item.name}</td>
+                            {data[0].items.map((item, index) =>
+                                <tr key={index}>
+                                    <td className="text-left pl-6 pb-6 text-neutral font-medium text-xs">{item.name}</td>
                                     <td className="text-left pb-6 text-neutral font-medium text-xs">{item.quantity}</td>
                                     <td className="text-right pb-6 text-neutral font-medium text-xs">${item.price}</td>
                                     <td className="text-right pr-6 pb-6 text-neutral font-medium text-xs">${item.total}</td>
                                 </tr>
-                            ))}
+                            )}
                         </tbody>
                         <tfoot className="bg-black text-neutral">
                             <tr>

@@ -11,14 +11,11 @@ const InvoiceDetails = (props) => {
     const [invoiceData, setInvoiceData] = useState([]);
     const id = props.match.params.id;
     // const invoice = useSelector((state) => state.invoices.find(invoice => invoice._id == id));
-    const filterInvoice = () => {
+    useEffect(() => {
         const invoiceData = data.filter(invoice => invoice.id === id);
         setInvoiceData(invoiceData);
-    }
-    useEffect(() => {
-        filterInvoice()
-        // eslint-disable-next-line
-    }, [])
+        // will need to add data as a dependency
+    }, [id]);
 
     return (
         <div className="mx-auto px-12 py-16 w-full max-w-3xl">

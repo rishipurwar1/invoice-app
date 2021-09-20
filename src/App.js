@@ -1,9 +1,9 @@
 import './App.css';
 import './assets/output.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { getInvoices } from './actions/invoices'
+// import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
+// import { getInvoices } from './actions/invoices'
 
 // custom components
 import Dashboard from './components/Dashboard';
@@ -13,11 +13,11 @@ import UpdateInvoice from './components/UpdateInvoice';
 import InvoiceDetails from './components/InvoiceDetails';
 
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getInvoices());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getInvoices());
+  // }, [dispatch]);
   return (
     <Router>
       <div className="App grid grid-cols-body grid-rows-1 bg-primaryTwo font-display">
