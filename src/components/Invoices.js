@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const Invoices = () => {
   const invoices = useSelector((state) => state.invoices);
-  console.log(invoices);
 
   return (
     <div className="text-white w-full">
