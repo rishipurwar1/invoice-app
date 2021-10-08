@@ -1,7 +1,9 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
 
-import invoices from './invoices'
+import invoices from "./invoices";
+import auth from "./auth";
 
-export default combineReducers({
-    invoices: invoices
-})
+export const reducers = combineReducers({
+  invoices,
+  auth,
+});
