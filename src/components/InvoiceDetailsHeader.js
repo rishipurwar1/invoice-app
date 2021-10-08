@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import CreateInvoice from "./CreateInvoice";
 import Modal from "./Modal";
+import { useDispatch } from "react-redux";
+import { paidInvoice } from "../actions/invoices";
 
 const InvoiceDetailsHeader = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
   const [openForm, setOpenForm] = useState(false);
+  const dispatch = useDispatch();
+
   let badgeClass = "";
   let dotClass = "";
   switch (data.length > 0 && data[0].status) {
@@ -46,9 +50,9 @@ const InvoiceDetailsHeader = ({ data }) => {
             >
               Delete
             </button>
-            <button className="text-white text-xs font-bold bg-secondaryTwo px-6 py-4 rounded-full">
+            {data[0].status !== "paid" && <button className="text-white text-xs font-bold bg-secondaryTwo px-6 py-4 rounded-full" onClick={() => dispatch(paidInvoice(data[0]._id))}>
               Mark As Paid
-            </button>
+            </button>}
           </div>
         </div>
         {showModal && (

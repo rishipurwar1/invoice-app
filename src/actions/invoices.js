@@ -45,3 +45,12 @@ export const updateInvoice = (id, invoice) => async (dispatch) => {
     console.log(error)
   }
 }
+
+export const paidInvoice = (id) => async (dispatch) => {
+  try {
+    const {data} = await api.paidInvoice(id);
+    dispatch({type: 'UPDATE', payload: data});
+  } catch (error) {
+    console.log(error)
+  }
+}

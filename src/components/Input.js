@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-const Input = ({ inputName, readOnly, type, total, appearance = false }) => {
+const Input = ({ inputName, readOnly, type, total }) => {
   const { register, formState: errors } = useFormContext();
   return (
     <input
@@ -9,10 +9,7 @@ const Input = ({ inputName, readOnly, type, total, appearance = false }) => {
       type={type}
       name={inputName}
       id={inputName}
-      onChange={(e) => {
-        // console.log(e.target.value);
-      }}
-      className={`${appearance && "appearance-none"} ${
+      className={`${
         errors.errors[inputName]?.type === "required"
           ? "focus:outline-none focus:border-red-500"
           : "focus:outline-none focus:border-secondaryOne"

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import {
   useForm,
@@ -37,28 +37,28 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
 
   // submit handler
   const onSubmit = (data) => {
-    if(invoice){
+    if (invoice) {
       dispatch(updateInvoice(invoice._id, data));
-      setOpenForm(!openForm)
+      setOpenForm(!openForm);
       history.push("/");
-      reset('', {
+      reset("", {
         keepValues: false,
-    })
+      });
     } else {
       data.status = "pending";
       dispatch(createInvoice(data));
       setOpenForm(!openForm);
       history.push("/");
-    //   reset('', {
-    //     keepValues: false,
-    // })
+      //   reset('', {
+      //     keepValues: false,
+      // })
     }
   };
 
   useEffect(() => {
-    if(invoice){
-      for(const key in invoice){
-        switch(key){
+    if (invoice) {
+      for (const key in invoice) {
+        switch (key) {
           case "paymentDue":
             setValue(key, moment(invoice[key]).toDate());
             break;
@@ -73,7 +73,7 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
         }
       }
     }
-  }, [invoice, setValue])
+  }, [invoice, setValue]);
 
   return (
     <div
@@ -82,7 +82,7 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
       }`}
     >
       <div
-        className="fixed top-0 left-0 flex items-center justify-center w-full h-screen z-10 bg-white bg-opacity-10 "
+        className="fixed top-0 left-0 flex items-center justify-center w-full h-screen z-10 bg-white bg-opacity-10"
         onClick={() => setOpenForm(!openForm)}
       ></div>
       <div className="fixed top-0 left-0 z-20 ml-24">
@@ -102,14 +102,14 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
                 <Label labelName="Street Address" />
                 <Input inputName="streetAddress" type="text" />
               </div>
-              <div className="flex justify-between flex-wrap">
+              <div className="flex justify-between flex-wrap md:flex-nowrap">
                 <div>
                   <Label labelName="City" />
                   <Input inputName="city" errors={errors} type="text" />
                 </div>
-                <div>
+                <div className="mx-2">
                   <Label labelName="Post Code" />
-                  <Input inputName="postCode" type="number" appearance />
+                  <Input inputName="postCode" type="text" appearance />
                 </div>
                 <div>
                   <Label labelName="Country" />
@@ -131,14 +131,14 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
                 <Label labelName="Street Address" />
                 <Input inputName="clientStreetAddress" type="text" />
               </div>
-              <div className="flex flex-wrap justify-between">
+              <div className="flex flex-wrap md:flex-nowrap justify-between">
                 <div>
                   <Label labelName="City" />
                   <Input inputName="clientCity" type="text" />
                 </div>
-                <div>
+                <div className="mx-2">
                   <Label labelName="Post Code" />
-                  <Input inputName="clientPostCode" type="number" appearance />
+                  <Input inputName="clientPostCode" type="text" appearance />
                 </div>
                 <div>
                   <Label labelName="Country" />
