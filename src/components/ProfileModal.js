@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Avatar from "react-avatar";
 
 const ProfileModal = ({ logout, user }) => {
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
-  // console.log(user.result.imageUrl);
+
   return (
     <div className="relative block">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="block h-10 w-10 rounded-full overflow-hidden focus:outline-none"
-      >
-        <img
-          className=" h-full w-full object-cover cursor-pointer"
-          src={user?.result.imageUrl}
-          alt="user profile"
+      {user && (
+        <Avatar
+          name={user.result.name}
+          size="50"
+          round={true}
+          onClick={() => setIsOpen(!isOpen)}
+          className="block overflow-hidden focus:outline-none cursor-pointer"
         />
-      </button>
+      )}
       {isOpen && (
         <ul
           className="absolute -top-4 -right-40 p-2 mt-2 space-y-2 text-gray-300 bg-primaryOne rounded-md shadow-md"

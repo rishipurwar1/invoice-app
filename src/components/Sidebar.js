@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.svg";
 import iconSun from "../assets/images/icon-sun.svg";
-import imageAvatar from "../assets/images/image-avatar.jpg";
 import ProfileModal from "./ProfileModal";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router";

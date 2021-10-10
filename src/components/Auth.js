@@ -5,6 +5,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { signin, signup } from "../actions/auth";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -18,7 +19,11 @@ const Auth = () => {
   const history = useHistory();
 
   const onSubmit = (data) => {
-    // e.preventDefault();
+    if (isLogin) {
+      dispatch(signin(data, history));
+    } else {
+      dispatch(signup(data, history));
+    }
     console.log(data);
   };
 
@@ -64,13 +69,19 @@ const Auth = () => {
                 SIGN UP
               </button>
             </div>
+            {!isLogin && (
+              <div>
+                <Label labelName="Name" />
+                <Input inputName="name" type="text" />
+              </div>
+            )}
             <div>
               <Label labelName="Email" />
-              <Input inputName="Email" type="email" />
+              <Input inputName="email" type="email" />
             </div>
             <div>
               <Label labelName="Password" />
-              <Input inputName="Password" type="password" />
+              <Input inputName="password" type="password" />
             </div>
             {isLogin && (
               <a
@@ -105,12 +116,6 @@ const Auth = () => {
                   </button>
                 )}
               />
-              <button
-                type="button"
-                className="bg-black px-4 py-3 w-full rounded-md text-white font-bold shadow-md"
-              >
-                <i className="fab fa-github mr-2"></i>Continue with Github
-              </button>
             </div>
           </form>
         </FormProvider>
