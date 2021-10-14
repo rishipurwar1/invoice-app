@@ -11,14 +11,16 @@ const Modal = ({ setShowModal, invoiceId }) => {
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
         <div className="relative w-auto my-6 mx-auto max-w-2xl">
           {/*content*/}
-          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white p-10 outline-none focus:outline-none">
+          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-primaryOne p-10 outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start justify-between rounded-t">
-              <h3 className="text-2xl font-semibold">Confirm Deletion</h3>
+              <h3 className="text-2xl font-semibold text-white">
+                Confirm Deletion
+              </h3>
             </div>
             {/*body*/}
             <div className="relative flex-auto">
-              <p className="my-6 text-gray-400 text-xs leading-relaxed">
+              <p className="my-6 text-gray-300 text-xs leading-relaxed">
                 Are you sure you want to delete invoice AU6645? This action
                 <br />
                 cannot be undone.
@@ -48,7 +50,7 @@ const Modal = ({ setShowModal, invoiceId }) => {
           </div>
         </div>
       </div>
-      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      <div className="fixed inset-0 z-40 bg-white bg-opacity-10"></div>
     </>
   );
 };

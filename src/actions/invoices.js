@@ -39,18 +39,18 @@ export const deleteInvoice = (id) => async (dispatch) => {
 
 export const updateInvoice = (id, invoice) => async (dispatch) => {
   try {
-    const {data} = await api.updateInvoice(id, invoice);
-    dispatch({type: 'UPDATE', payload: data});
+    const { data } = await api.updateInvoice(id, invoice);
+    dispatch({ type: "UPDATE", payload: data });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 export const paidInvoice = (id) => async (dispatch) => {
   try {
-    const {data} = await api.paidInvoice(id);
-    dispatch({type: 'UPDATE', payload: data});
+    const { data } = await api.paidInvoice(id);
+    dispatch({ type: "UPDATE", payload: data });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};

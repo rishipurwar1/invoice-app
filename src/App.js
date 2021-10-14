@@ -6,12 +6,12 @@ import { useEffect } from "react";
 import { getInvoices } from "./actions/invoices";
 
 // custom components
-import Dashboard from "./components/Dashboard";
-import Sidebar from "./components/Sidebar";
-import CreateInvoice from "./components/CreateInvoice";
-import UpdateInvoice from "./components/UpdateInvoice";
-import InvoiceDetails from "./components/InvoiceDetails";
-import Auth from "./components/Auth";
+import Dashboard from "./components/dashboard/Dashboard";
+import Sidebar from "./components/layouts/Sidebar";
+import CreateInvoice from "./components/invoice/CreateInvoice";
+// import UpdateInvoice from "./components/UpdateInvoice";
+import InvoiceDetails from "./components/invoice/InvoiceDetails";
+import Auth from "./components/authForm/Auth";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Dashboard} />
           <Route path="/create" component={CreateInvoice} />
-          <Route path="/edit/:id" component={UpdateInvoice} />
+          {/* <Route path="/edit/:id" component={UpdateInvoice} /> */}
           <Route path="/invoice/:id" component={InvoiceDetails} />
           <Route path="/auth" component={Auth} />
         </Switch>

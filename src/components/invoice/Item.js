@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import Input from "./Input";
-import Label from "./Label";
+import Input from "../utils/Input";
+import Label from "../utils/Label";
 
 const Item = ({ fieldId, remove, index }) => {
   const { control, setValue } = useFormContext();

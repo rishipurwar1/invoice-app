@@ -8,12 +8,12 @@ import {
 } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Label from "./Label";
-import Input from "./Input";
+import Label from "../utils/Label";
+import Input from "../utils/Input";
 import Item from "./Item";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { createInvoice, updateInvoice } from "../actions/invoices";
+import { createInvoice, updateInvoice } from "../../actions/invoices";
 
 const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
   let history = useHistory();
@@ -49,9 +49,6 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
       dispatch(createInvoice(data));
       setOpenForm(!openForm);
       history.push("/");
-      //   reset('', {
-      //     keepValues: false,
-      // })
     }
   };
 
@@ -203,7 +200,6 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
               </button>
             </div>
             <div className="flex justify-between py-4">
-              jsx
               <button
                 type="button"
                 className="rounded-full text-neutral text-xs bg-primaryOne outline-none px-8 py-4 font-bold"

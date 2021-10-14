@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import CreateInvoice from "./CreateInvoice";
-import Modal from "./Modal";
+import Modal from "../Modal";
 import { useDispatch } from "react-redux";
-import { paidInvoice } from "../actions/invoices";
+import { paidInvoice } from "../../actions/invoices";
 
 const InvoiceDetailsHeader = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const dispatch = useDispatch();
+
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   let badgeClass = "";
   let dotClass = "";
@@ -40,20 +42,30 @@ const InvoiceDetailsHeader = ({ data }) => {
               </small>
             </div>
           </div>
-          <div className="flex">
-            <button className="text-white text-xs font-bold px-6 py-4 rounded-full bg-borderOne" onClick={() => setOpenForm(!openForm)}>
-              Edit
-            </button>
-            <button
-              className="text-white text-xs font-bold px-6 py-4 rounded-full bg-buttonOne mx-3"
-              onClick={() => setShowModal(!showModal)}
-            >
-              Delete
-            </button>
-            {data[0].status !== "paid" && <button className="text-white text-xs font-bold bg-secondaryTwo px-6 py-4 rounded-full" onClick={() => dispatch(paidInvoice(data[0]._id))}>
-              Mark As Paid
-            </button>}
-          </div>
+          {user?.result?._id === data[0]?.creator ? (
+            <div className="flex">
+              <button
+                className="text-white text-xs font-bold px-6 py-4 rounded-full bg-borderOne"
+                onClick={() => setOpenForm(!openForm)}
+              >
+                Edit
+              </button>
+              <button
+                className="text-white text-xs font-bold px-6 py-4 rounded-full bg-buttonOne mx-3"
+                onClick={() => setShowModal(!showModal)}
+              >
+                Delete
+              </button>
+              {data[0].status !== "paid" && (
+                <button
+                  className="text-white text-xs font-bold bg-secondaryTwo px-6 py-4 rounded-full"
+                  onClick={() => dispatch(paidInvoice(data[0]._id))}
+                >
+                  Mark As Paid
+                </button>
+              )}
+            </div>
+          ) : null}
         </div>
         {showModal && (
           <Modal
@@ -62,7 +74,13 @@ const InvoiceDetailsHeader = ({ data }) => {
             setShowModal={setShowModal}
           />
         )}
-        {openForm ? <CreateInvoice invoice={data[0]} openForm={openForm} setOpenForm={setOpenForm} /> : null}
+        {openForm ? (
+          <CreateInvoice
+            invoice={data[0]}
+            openForm={openForm}
+            setOpenForm={setOpenForm}
+          />
+        ) : null}
       </>
     );
   }

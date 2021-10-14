@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Input from "./Input";
-import Label from "./Label";
+import Input from "../utils/Input";
+import Label from "../utils/Label";
 import { useForm, FormProvider } from "react-hook-form";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { signin, signup } from "../actions/auth";
+import { signin, signup } from "../../actions/auth";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -24,7 +24,6 @@ const Auth = () => {
     } else {
       dispatch(signup(data, history));
     }
-    console.log(data);
   };
 
   const googleSuccess = async (res) => {
@@ -52,7 +51,9 @@ const Auth = () => {
             <div className="w-full flex justify-around mb-2">
               <button
                 className={`${
-                  isLogin ? "bg-secondaryTwo" : "bg-transparent"
+                  isLogin
+                    ? "bg-secondaryTwo"
+                    : "transition bg-transparent hover:bg-secondaryTwo"
                 } text-white text-xs font-bold px-6 py-4 rounded-full`}
                 type="button"
                 onClick={() => setIsLogin(true)}
@@ -61,7 +62,9 @@ const Auth = () => {
               </button>
               <button
                 className={`${
-                  !isLogin ? "bg-secondaryTwo" : "bg-transparent"
+                  !isLogin
+                    ? "bg-secondaryTwo"
+                    : "transition bg-transparent hover:bg-secondaryTwo"
                 } text-white text-xs font-bold px-6 py-4 rounded-full`}
                 type="button"
                 onClick={() => setIsLogin(false)}
@@ -69,29 +72,39 @@ const Auth = () => {
                 SIGN UP
               </button>
             </div>
-            {!isLogin && (
+            <div>
+              {!isLogin && (
+                <div>
+                  <Label labelName="Name" />
+                  <Input inputName="name" type="text" bgColor="primaryTwo" />
+                </div>
+              )}
               <div>
-                <Label labelName="Name" />
-                <Input inputName="name" type="text" />
+                <Label labelName="Email" />
+                <Input inputName="email" type="email" bgColor="primaryTwo" />
               </div>
-            )}
-            <div>
-              <Label labelName="Email" />
-              <Input inputName="email" type="email" />
+              <div>
+                <Label labelName="Password" />
+                <Input
+                  inputName="password"
+                  type="password"
+                  bgColor="primaryTwo"
+                />
+              </div>
             </div>
-            <div>
-              <Label labelName="Password" />
-              <Input inputName="password" type="password" />
-            </div>
-            {isLogin && (
-              <a
-                href="/"
-                className="block text-neutral font-extralight text-xs pt-6 text-center"
+            <div className="text-center">
+              <button
+                type="button"
+                onClick={() => setIsLogin(!isLogin)}
+                className="text-neutral font-extralight text-xs pt-6"
               >
-                Forgot Password?
-              </a>
-            )}
-            <button className="bg-secondaryTwo px-4 py-3 w-full rounded-md text-white font-bold mt-4 shadow-md">
+                {!isLogin
+                  ? "Already have an account? Log In"
+                  : "Don't have an account? Sign Up"}
+              </button>
+            </div>
+
+            <button className="bg-secondaryTwo hover:bg-secondaryOne transition px-4 py-3 w-full rounded-md text-white font-bold mt-4 shadow-md">
               {isLogin ? "Log In" : "Sign Up"}
             </button>
             <div className="flex items-center py-6">
@@ -107,7 +120,7 @@ const Auth = () => {
                 cookiePolicy="single_host_origin"
                 render={(renderProps) => (
                   <button
-                    className="bg-blue-600 px-4 py-3 w-full rounded-md text-white font-bold mb-4 shadow-md"
+                    className="bg-blue-600 hover:bg-blue-500 transition px-4 py-3 w-full rounded-md text-white font-bold mb-4 shadow-md"
                     type="button"
                     onClick={renderProps.onClick}
                     disabled={renderProps.disabled}

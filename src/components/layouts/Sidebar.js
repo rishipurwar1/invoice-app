@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.svg";
-import iconSun from "../assets/images/icon-sun.svg";
-import ProfileModal from "./ProfileModal";
+import logo from "../../assets/images/logo.svg";
+import iconSun from "../../assets/images/icon-sun.svg";
+import ProfileModal from "../utils/ProfileModal";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router";
+import decode from "jwt-decode";
 
 const Sidebar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -19,9 +20,12 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    // const token = user?.token;
+    const token = user?.token;
 
-    // JWT ....
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
@@ -37,8 +41,18 @@ const Sidebar = () => {
       <div className="flex flex-col items-center justify-evenly h-36">
         <img src={iconSun} alt="theme" />
         <div className="w-full h-px bg-sidebar-border"></div>
-        {/* <img className="rounded-full w-8 h-8" src={imageAvatar} alt="avatar" /> */}
-        <ProfileModal logout={logout} user={user} />
+        {user ? (
+          <ProfileModal logout={logout} user={user} />
+        ) : (
+          <button
+            onClick={() => {
+              history.push("/auth");
+            }}
+            className="text-2xl px-2 py-1 text-white"
+          >
+            <i className="fas fa-sign-in-alt"></i>
+          </button>
+        )}
       </div>
     </aside>
   );

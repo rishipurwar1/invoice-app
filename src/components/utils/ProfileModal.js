@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Avatar from "react-avatar";
 
 const ProfileModal = ({ logout, user }) => {
-  const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
 
@@ -25,7 +24,6 @@ const ProfileModal = ({ logout, user }) => {
         >
           <li>
             <button
-              disabled={loading}
               onClick={() => {
                 logout();
                 setIsOpen(!isOpen);
