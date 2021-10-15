@@ -11,7 +11,6 @@ export const getInvoices = () => async (dispatch) => {
 };
 
 export const filterInvoices = (query) => async (dispatch) => {
-  console.log(query);
   try {
     const { data } = await api.filterInvoices(query);
     dispatch({ type: "FETCH_FILTER_INVOICES", payload: data });

@@ -3,17 +3,27 @@ import Input from "../utils/Input";
 import Label from "../utils/Label";
 import { useForm, FormProvider } from "react-hook-form";
 import { GoogleLogin } from "react-google-login";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { signin, signup } from "../../actions/auth";
+import ErrorMessage from "../utils/ErrorMessage";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const formMethods = useForm();
   const { handleSubmit } = formMethods;
+  const authData = useSelector((state) => state.auth.authData);
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const removeError = () => {
+    dispatch({ type: "REMOVE_ERROR" });
+  };
+  const switchMode = () => {
+    setIsLogin((prevIsLogin) => !prevIsLogin);
+    removeError();
+  };
 
   const onSubmit = (data) => {
     if (isLogin) {
@@ -53,7 +63,7 @@ const Auth = () => {
                     : "transition bg-transparent hover:bg-secondaryTwo"
                 } text-white text-xs font-bold px-6 py-4 rounded-full`}
                 type="button"
-                onClick={() => setIsLogin(true)}
+                onClick={switchMode}
               >
                 LOG IN
               </button>
@@ -64,7 +74,7 @@ const Auth = () => {
                     : "transition bg-transparent hover:bg-secondaryTwo"
                 } text-white text-xs font-bold px-6 py-4 rounded-full`}
                 type="button"
-                onClick={() => setIsLogin(false)}
+                onClick={switchMode}
               >
                 SIGN UP
               </button>
@@ -99,6 +109,7 @@ const Auth = () => {
                   ? "Already have an account? Log In"
                   : "Don't have an account? Sign Up"}
               </button>
+              <ErrorMessage errorMessage={authData?.message} />
             </div>
 
             <button className="bg-secondaryTwo hover:bg-secondaryOne transition px-4 py-3 w-full rounded-md text-white font-bold mt-4 shadow-md">

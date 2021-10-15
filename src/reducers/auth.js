@@ -8,6 +8,8 @@ const authReducer = (state = { authData: null }, action) => {
       return { state, authData: null };
     case "ERROR":
       return { state, authData: action?.data };
+    case "REMOVE_ERROR":
+      return { state, authData: null };
     default:
       return state;
   }

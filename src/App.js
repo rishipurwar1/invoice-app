@@ -9,7 +9,6 @@ import { getInvoices } from "./actions/invoices";
 import Dashboard from "./components/dashboard/Dashboard";
 import Sidebar from "./components/layouts/Sidebar";
 import CreateInvoice from "./components/invoice/CreateInvoice";
-// import UpdateInvoice from "./components/UpdateInvoice";
 import InvoiceDetails from "./components/invoice/InvoiceDetails";
 import Auth from "./components/authForm/Auth";
 
