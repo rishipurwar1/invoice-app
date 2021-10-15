@@ -10,10 +10,7 @@ import { signin, signup } from "../../actions/auth";
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const formMethods = useForm();
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = formMethods;
+  const { handleSubmit } = formMethods;
 
   const dispatch = useDispatch();
   const history = useHistory();
