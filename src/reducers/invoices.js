@@ -3,11 +3,13 @@ export default (invoices = [], action) => {
   switch (action.type) {
     case "FETCH_ALL":
       return action.payload;
-    case "FETCH_A_INVOICE":
+    case "FETCH_FILTER_INVOICES":
       return action.payload;
     case "UPDATE":
     case "PAID":
-      return invoices.map(invoice => invoice._id === action.payload._id ? action.payload : invoice);
+      return invoices.map((invoice) =>
+        invoice._id === action.payload._id ? action.payload : invoice
+      );
     case "DELETE":
       return invoices.filter((invoice) => invoice._id !== action.payload);
     case "CREATE":
