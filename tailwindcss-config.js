@@ -1,7 +1,13 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    screens: {
+      xs: "300px",
+      ...defaultTheme.screens,
+    },
     extend: {
       fontFamily: {
         display: ["Spartan", "sans serif"],
@@ -9,6 +15,9 @@ module.exports = {
       gridTemplateColumns: {
         body: "96px 1fr",
         card: "5rem 9rem 1fr min-content min-content min-content",
+      },
+      gridTemplateRows: {
+        mobile: "80px 1fr",
       },
       colors: {
         primaryOne: "#1e2139",
