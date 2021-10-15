@@ -3,6 +3,12 @@ import { useSelector } from "react-redux";
 import iconPlus from "../../assets/images/icon-plus.svg";
 import Modal from "../utils/Modal";
 
+const options = [
+  { name: "Paid", id: "paid" },
+  { name: "Pending", id: "pending" },
+  { name: "draft", id: "draft" },
+];
+
 const Header = ({ openForm, setOpenForm }) => {
   const [showModal, setShowModal] = useState(false);
   const invoices = useSelector((state) => state.invoices);
@@ -15,6 +21,7 @@ const Header = ({ openForm, setOpenForm }) => {
       setShowModal(true);
     }
   };
+  const [selected, setSelected] = useState([]);
   return (
     <>
       <div className="col-start-2 col-end-3 flex justify-between items-center w-full mb-14">
@@ -22,15 +29,21 @@ const Header = ({ openForm, setOpenForm }) => {
           Invoices
           <p className="text-xs font-extralight tracking-wide text-neutral">{`There are ${invoices.length} total invoices.`}</p>
         </h1>
-        <button
-          className="text-white text-xs font-semibold flex bg-secondaryTwo hover:bg-purple-500 transition px-2 py-2 pr-4 rounded-full items-center"
-          onClick={() => handleClick()}
-        >
-          <div className="rounded-full h-8 w-8 flex items-center justify-center bg-white mr-2">
-            <img src={iconPlus} alt="add new invoice" />
-          </div>
-          New Invoice
-        </button>
+        <div className="flex">
+          <button className="text-white text-xs font-bold">
+            Filter by status{" "}
+            <i className="fas fa-chevron-down text-secondaryTwo pl-2"></i>
+          </button>
+          <button
+            className="text-white text-xs font-semibold flex bg-secondaryTwo hover:bg-purple-500 transition px-2 py-2 pr-4 ml-4 rounded-full items-center"
+            onClick={() => handleClick()}
+          >
+            <div className="rounded-full h-8 w-8 flex items-center justify-center bg-white mr-2">
+              <img src={iconPlus} alt="add new invoice" />
+            </div>
+            New Invoice
+          </button>
+        </div>
       </div>
       {showModal && <Modal setShowModal={setShowModal} />}
     </>

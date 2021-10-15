@@ -1,6 +1,11 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: process.env.REACT_APP_BASE_URL });
+const API = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+  validateStatus: function (status) {
+    return status >= 200 && status < 300; // default
+  },
+});
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
