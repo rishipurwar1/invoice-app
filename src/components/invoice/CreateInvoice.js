@@ -5,6 +5,7 @@ import {
   Controller,
   useFieldArray,
   FormProvider,
+  useWatch,
 } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,9 +18,16 @@ import { createInvoice, updateInvoice } from "../../actions/invoices";
 
 const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
   let history = useHistory();
-  const formMethods = useForm();
+  const formMethods = useForm({
+    defaultValues: {
+      invoiceDate: new Date(),
+    },
+  });
 
   const { register, control, handleSubmit, setValue, reset } = formMethods;
+  const formData = useWatch({
+    control,
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -29,29 +37,26 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
   const dispatch = useDispatch();
 
   // submit handler
-  const onSubmit = (data) => {
+  const onSubmit = async (data, status) => {
     if (invoice) {
-      dispatch(updateInvoice(invoice._id, data));
+      await dispatch(updateInvoice(invoice._id, data));
       setOpenForm(!openForm);
       history.push("/");
       reset("", {
         keepValues: false,
       });
     } else {
-      data.status = "pending";
-      // eslint-disable-next-line
-      Date.prototype.addDays = function (days) {
-        var date = new Date(this.valueOf());
+      const addDays = (days) => {
+        let date = new Date(data.invoiceDate.getTime());
         date.setDate(date.getDate() + days);
         return date;
       };
-      var date = new Date();
-      console.log(date);
 
-      dispatch(
+      await dispatch(
         createInvoice({
           ...data,
-          paymentDue: date.addDays(+data.paymentTerms),
+          status,
+          paymentDue: addDays(+data.paymentTerms),
         })
       );
       setOpenForm(!openForm);
@@ -64,6 +69,9 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
       for (const key in invoice) {
         switch (key) {
           case "paymentDue":
+            setValue(key, moment(invoice[key]).toDate());
+            break;
+          case "invoiceDate":
             setValue(key, moment(invoice[key]).toDate());
             break;
           case "createdAt":
@@ -92,7 +100,7 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
       <div className="fixed top-0 left-0 z-20 md:ml-24">
         <FormProvider {...formMethods}>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit((data) => onSubmit(data, "pending"))}
             className="w-screen max-w-2xl h-screen bg-primaryTwo px-4 py-14 md:p-14"
           >
             <h1 className="text-white text-2xl font-bold mb-10">
@@ -216,7 +224,11 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
                 Discard
               </button>
               <div className="md:pr-7">
-                <button className="rounded-full text-neutral transition hover:bg-opacity-60 text-xs bg-primaryOne outline-none px-4 md:px-8 py-4 font-bold">
+                <button
+                  type="button"
+                  className="rounded-full text-neutral transition hover:bg-opacity-60 text-xs bg-primaryOne outline-none px-4 md:px-8 py-4 font-bold"
+                  onClick={() => onSubmit(formData, "draft")}
+                >
                   Save as Draft
                 </button>
                 <button className="rounded-full text-neutral text-xs bg-secondaryTwo hover:bg-purple-500 transition outline-none ml-1 md:ml-2 px-4 md:px-8 py-4 font-bold">
