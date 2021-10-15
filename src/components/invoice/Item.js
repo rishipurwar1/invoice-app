@@ -17,7 +17,7 @@ const Item = ({ fieldId, remove, index }) => {
         <Label labelName="Item Name" />
         <Input inputName={`${fieldId}.name`} type="text" />
       </div>
-      <div className="w-2/12 mx-3">
+      <div className="w-2/12 mx-1 md:mx-3">
         <Label labelName="Qty." />
         <Input inputName={`${fieldId}.quantity`} type="number" appearance />
       </div>
@@ -25,7 +25,7 @@ const Item = ({ fieldId, remove, index }) => {
         <Label labelName="Price" />
         <Input inputName={`${fieldId}.price`} type="number" appearance />
       </div>
-      <div className="mx-3">
+      <div className="mx-1 md:mx-3">
         <Label labelName="Total" />
         <Input inputName={`${fieldId}.total`} type="number" readOnly />
       </div>

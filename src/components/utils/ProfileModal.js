@@ -9,17 +9,19 @@ const ProfileModal = ({ logout, user }) => {
   return (
     <div className="relative block">
       {user && (
-        <Avatar
-          name={user.result.name}
-          size="50"
-          round={true}
-          onClick={() => setIsOpen(!isOpen)}
-          className="block overflow-hidden focus:outline-none cursor-pointer"
-        />
+        <div className="m-2">
+          <Avatar
+            name={user.result.name}
+            size="50"
+            round={true}
+            onClick={() => setIsOpen(!isOpen)}
+            className="block overflow-hidden focus:outline-none cursor-pointer"
+          />
+        </div>
       )}
       {isOpen && (
         <ul
-          className="absolute -top-4 -right-40 p-2 mt-2 space-y-2 text-gray-300 bg-primaryOne rounded-md shadow-md"
+          className="absolute right-2 top-20 md:-top-4 md:-right-40 p-2 mt-2 space-y-2 text-gray-300 bg-primaryOne rounded-md shadow-md"
           aria-label="sub-menu"
         >
           <li>

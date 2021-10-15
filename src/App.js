@@ -21,7 +21,7 @@ function App() {
   }, [dispatch]);
   return (
     <Router>
-      <div className="App grid grid-cols-body grid-rows-1 bg-primaryTwo font-display">
+      <div className="App grid grid-cols-1 md:grid-cols-body grid-rows-mobile md:grid-rows-1 gap-16 md:gap-0 bg-primaryTwo font-display">
         <Sidebar />
         <Switch>
           <Route exact path="/" component={Dashboard} />

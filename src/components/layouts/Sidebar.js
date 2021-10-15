@@ -30,17 +30,17 @@ const Sidebar = () => {
   }, [location]);
 
   return (
-    <aside className="sticky top-0 row-start-1 row-end-2 col-start-1 col-end-2 h-screen bg-primaryOne rounded-r-3xl flex flex-col justify-between z-20">
+    <aside className="sticky top-0 row-start-1 row-end-2 col-start-1 col-end-2 h-20 md:h-screen bg-primaryOne md:rounded-r-3xl flex md:flex-col justify-between items-center md:items-stretch z-20">
       <Link
         to="/"
-        className="bg-logo-primary h-24 flex justify-center items-center flex-col relative rounded-r-3xl"
+        className="bg-logo-primary h-20 md:h-24 w-20 md:w-24 flex justify-center items-center md:flex-col relative rounded-r-2xl"
       >
         <img className="z-10 w-9" src={logo} alt="logo" />
-        <div className="bg-logo-secondary h-12 w-24 absolute bottom-0 left-0 rounded-tl-3xl rounded-br-3xl"></div>
+        <div className="bg-logo-secondary h-12 w-20 md:w-24 absolute bottom-0 left-0 rounded-tl-2xl rounded-br-2xl"></div>
       </Link>
-      <div className="flex flex-col items-center justify-evenly h-36">
-        <img src={iconSun} alt="theme" />
-        <div className="w-full h-px bg-sidebar-border"></div>
+      <div className="flex md:flex-col items-center md:justify-evenly md:h-36">
+        <img src={iconSun} alt="theme" className="pr-8 md:pr-0" />
+        <div className="w-px md:w-full h-20 md:h-px bg-sidebar-border"></div>
         {user ? (
           <ProfileModal logout={logout} user={user} />
         ) : (
@@ -48,7 +48,7 @@ const Sidebar = () => {
             onClick={() => {
               history.push("/auth");
             }}
-            className="text-2xl px-2 py-1 text-white"
+            className="text-2xl px-8 md:px-2 py-1 text-white"
           >
             <i className="fas fa-sign-in-alt"></i>
           </button>

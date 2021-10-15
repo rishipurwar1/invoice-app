@@ -26,7 +26,7 @@ const InvoiceCardDetails = ({ data }) => {
             <p className="text-neutral text-xs text-right">{data[0].country}</p>
           </address>
         </div>
-        <div className="flex justify-between my-10">
+        <div className="flex justify-between flex-wrap my-10">
           <div>
             <div>
               <small className="text-neutral text-xs">Invoice Date</small>
@@ -41,7 +41,7 @@ const InvoiceCardDetails = ({ data }) => {
               </h2>
             </div>
           </div>
-          <address className="text-neutral not-italic">
+          <address className="text-neutral not-italic mx-2">
             <div>
               <small className="text-neutral text-xs">Bill To</small>
               <h2 className="text-sm text-white font-bold">
@@ -57,7 +57,7 @@ const InvoiceCardDetails = ({ data }) => {
               <p className="text-neutral text-xs">{data[0].clientCountry}</p>
             </div>
           </address>
-          <div>
+          <div className="">
             <small className="text-neutral text-xs">Sent to</small>
             <h2 className="text-sm text-white font-bold">
               {data[0].clientEmail}

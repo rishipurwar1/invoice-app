@@ -19,14 +19,7 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
   let history = useHistory();
   const formMethods = useForm();
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    setValue,
-    reset,
-    formState: { errors },
-  } = formMethods;
+  const { register, control, handleSubmit, setValue, reset } = formMethods;
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -82,16 +75,16 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
         className="fixed top-0 left-0 flex items-center justify-center w-full h-screen z-10 bg-white bg-opacity-10"
         onClick={() => setOpenForm(!openForm)}
       ></div>
-      <div className="fixed top-0 left-0 z-20 ml-24">
+      <div className="fixed top-0 left-0 z-20 md:ml-24">
         <FormProvider {...formMethods}>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="w-screen max-w-2xl h-screen bg-primaryTwo p-14"
+            className="w-screen max-w-2xl h-screen bg-primaryTwo px-4 py-14 md:p-14"
           >
             <h1 className="text-white text-2xl font-bold mb-10">
               Create Invoice
             </h1>
-            <div className="overflow-scroll w-full h-full flex flex-col pr-7 content-area pb-10">
+            <div className="overflow-scroll w-full h-full flex flex-col pr-4 md:pr-7 content-area pb-10">
               <small className="text-secondaryTwo font-bold text-xs">
                 Bill Form
               </small>
@@ -102,9 +95,9 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
               <div className="flex justify-between flex-wrap md:flex-nowrap">
                 <div>
                   <Label labelName="City" />
-                  <Input inputName="city" errors={errors} type="text" />
+                  <Input inputName="city" type="text" />
                 </div>
-                <div className="mx-2">
+                <div className="md:mx-2">
                   <Label labelName="Post Code" />
                   <Input inputName="postCode" type="text" appearance />
                 </div>
@@ -133,7 +126,7 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
                   <Label labelName="City" />
                   <Input inputName="clientCity" type="text" />
                 </div>
-                <div className="mx-2">
+                <div className="md:mx-2">
                   <Label labelName="Post Code" />
                   <Input inputName="clientPostCode" type="text" appearance />
                 </div>
@@ -202,22 +195,16 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
             <div className="flex justify-between py-4">
               <button
                 type="button"
-                className="rounded-full text-neutral text-xs bg-primaryOne outline-none px-8 py-4 font-bold"
+                className="rounded-full text-neutral text-xs bg-primaryOne hover:bg-white hover:text-primaryOne transition outline-none px-4 md:px-8 py-4 font-bold"
                 onClick={() => setOpenForm(!openForm)}
               >
                 Discard
               </button>
-              <div className="pr-7">
-                <button
-                  type="button"
-                  className="rounded-full text-neutral text-xs bg-primaryOne outline-none px-8 py-4 font-bold"
-                >
+              <div className="md:pr-7">
+                <button className="rounded-full text-neutral transition hover:bg-opacity-60 text-xs bg-primaryOne outline-none px-4 md:px-8 py-4 font-bold">
                   Save as Draft
                 </button>
-                <button
-                  className="rounded-full text-neutral text-xs bg-secondaryTwo outline-none ml-2 px-8 py-4 font-bold"
-                  type="submit"
-                >
+                <button className="rounded-full text-neutral text-xs bg-secondaryTwo hover:bg-purple-500 transition outline-none ml-1 md:ml-2 px-4 md:px-8 py-4 font-bold">
                   Save & Send
                 </button>
               </div>

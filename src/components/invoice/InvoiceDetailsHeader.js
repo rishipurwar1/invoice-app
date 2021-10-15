@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import CreateInvoice from "./CreateInvoice";
-import Modal from "../Modal";
 import { useDispatch } from "react-redux";
 import { paidInvoice } from "../../actions/invoices";
+import DeleteModal from "../utils/DeleteModal";
 
 const InvoiceDetailsHeader = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
@@ -30,7 +30,7 @@ const InvoiceDetailsHeader = ({ data }) => {
     return (
       <>
         <div className="flex justify-between items-center w-full bg-primaryOne p-6 mt-6 rounded-lg">
-          <div className="flex items-center">
+          <div className="flex items-center justify-between w-full md:justify-start md:w-max">
             <small className="text-neutral text-xs">Status</small>
             <div
               className={`${badgeClass} ml-4 flex items-center w-28 p-4 rounded-lg shadow-sm`}
@@ -43,22 +43,22 @@ const InvoiceDetailsHeader = ({ data }) => {
             </div>
           </div>
           {user?.result?._id === data[0]?.creator ? (
-            <div className="flex">
+            <div className="md:flex hidden">
               <button
-                className="text-white text-xs font-bold px-6 py-4 rounded-full bg-borderOne"
+                className="text-white text-xs font-bold px-6 py-4 rounded-full transition bg-borderOne hover:bg-gray-200 hover:text-borderOne"
                 onClick={() => setOpenForm(!openForm)}
               >
                 Edit
               </button>
               <button
-                className="text-white text-xs font-bold px-6 py-4 rounded-full bg-buttonOne mx-3"
+                className="text-white text-xs font-bold px-6 py-4 rounded-full bg-buttonOne hover:bg-red-400 transition mx-3"
                 onClick={() => setShowModal(!showModal)}
               >
                 Delete
               </button>
               {data[0].status !== "paid" && (
                 <button
-                  className="text-white text-xs font-bold bg-secondaryTwo px-6 py-4 rounded-full"
+                  className="text-white text-xs font-bold bg-secondaryTwo px-6 py-4 rounded-full hover:bg-purple-500 transition"
                   onClick={() => dispatch(paidInvoice(data[0]._id))}
                 >
                   Mark As Paid
@@ -68,7 +68,7 @@ const InvoiceDetailsHeader = ({ data }) => {
           ) : null}
         </div>
         {showModal && (
-          <Modal
+          <DeleteModal
             invoiceId={data[0]._id}
             showModal={showModal}
             setShowModal={setShowModal}
