@@ -2,9 +2,6 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
-  validateStatus: function (status) {
-    return status >= 200 && status < 300; // default
-  },
 });
 
 API.interceptors.request.use((req) => {
@@ -17,8 +14,7 @@ API.interceptors.request.use((req) => {
 });
 
 export const fetchInvoices = () => API.get(`/invoices`);
-
-export const fetchInvoice = (id) => API.get(`/invoices/${id}`);
+export const filterInvoices = (query) => API.get(`/invoices?status=${query}`);
 
 export const createInvoice = (newInvoice) => API.post(`/invoices`, newInvoice);
 

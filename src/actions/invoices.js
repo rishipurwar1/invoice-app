@@ -10,10 +10,11 @@ export const getInvoices = () => async (dispatch) => {
   }
 };
 
-export const getInvoice = (id) => async (dispatch) => {
+export const filterInvoices = (query) => async (dispatch) => {
+  console.log(query);
   try {
-    const { data } = await api.fetchInvoice(id);
-    dispatch({ type: "FETCH_A_INVOICE", payload: data });
+    const { data } = await api.filterInvoices(query);
+    dispatch({ type: "FETCH_FILTER_INVOICES", payload: data });
   } catch (error) {
     console.log(error.message);
   }
