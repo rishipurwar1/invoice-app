@@ -17,6 +17,14 @@ const Auth = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const removeError = () => {
+    dispatch({ type: "REMOVE_ERROR" });
+  };
+  const switchMode = () => {
+    setIsLogin((prevIsLogin) => !prevIsLogin);
+    removeError();
+  };
+
   const onSubmit = (data) => {
     if (isLogin) {
       dispatch(signin(data, history));
@@ -55,7 +63,7 @@ const Auth = () => {
                     : "transition bg-transparent hover:bg-secondaryTwo"
                 } text-white text-xs font-bold px-6 py-4 rounded-full`}
                 type="button"
-                onClick={() => setIsLogin(true)}
+                onClick={switchMode}
               >
                 LOG IN
               </button>
@@ -66,7 +74,7 @@ const Auth = () => {
                     : "transition bg-transparent hover:bg-secondaryTwo"
                 } text-white text-xs font-bold px-6 py-4 rounded-full`}
                 type="button"
-                onClick={() => setIsLogin(false)}
+                onClick={switchMode}
               >
                 SIGN UP
               </button>
