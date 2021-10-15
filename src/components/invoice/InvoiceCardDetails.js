@@ -31,7 +31,7 @@ const InvoiceCardDetails = ({ data }) => {
             <div>
               <small className="text-neutral text-xs">Invoice Date</small>
               <h2 className="text-sm text-white font-bold">
-                {moment(data[0].createdAt).format("MMM Do YY")}
+                {moment(data[0].invoiceDate).format("MMM Do YY")}
               </h2>
             </div>
             <div className="mt-5">

@@ -39,7 +39,21 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
       });
     } else {
       data.status = "pending";
-      dispatch(createInvoice(data));
+      // eslint-disable-next-line
+      Date.prototype.addDays = function (days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+      };
+      var date = new Date();
+      console.log(date);
+
+      dispatch(
+        createInvoice({
+          ...data,
+          paymentDue: date.addDays(+data.paymentTerms),
+        })
+      );
       setOpenForm(!openForm);
       history.push("/");
     }
@@ -140,12 +154,13 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
                   <Label labelName="Invoice Date" />
                   <Controller
                     control={control}
-                    name="paymentDue"
+                    name="invoiceDate"
                     render={({ field }) => (
                       <DatePicker
                         className="w-full bg-primaryOne p-3 rounded-md shadow-md border border-borderOne focus:outline-none focus:border-secondaryOne transition text-white font-bold text-xs"
                         onChange={(date) => field.onChange(date)}
                         selected={field.value}
+                        dateFormat="dd/MM/yyyy"
                       />
                     )}
                   />
