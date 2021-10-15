@@ -49,9 +49,9 @@ const Sidebar = () => {
             onClick={() => {
               history.push("/auth");
             }}
-            className="text-2xl px-8 md:px-2 py-1 text-white"
+            className="text-2xl px-8 md:px-2 py-1 w-10 h-10 hover:bg-purple-500 transition text-white bg-secondaryTwo rounded-full"
           >
-            <i className="fas fa-sign-in-alt"></i>
+            <i className="fas fa-sign-in-alt text-base"></i>
           </button>
         )}
       </div>

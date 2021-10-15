@@ -3,14 +3,16 @@ import Input from "../utils/Input";
 import Label from "../utils/Label";
 import { useForm, FormProvider } from "react-hook-form";
 import { GoogleLogin } from "react-google-login";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { signin, signup } from "../../actions/auth";
+import ErrorMessage from "../utils/ErrorMessage";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const formMethods = useForm();
   const { handleSubmit } = formMethods;
+  const authData = useSelector((state) => state.auth.authData);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -99,6 +101,7 @@ const Auth = () => {
                   ? "Already have an account? Log In"
                   : "Don't have an account? Sign Up"}
               </button>
+              <ErrorMessage errorMessage={authData?.message} />
             </div>
 
             <button className="bg-secondaryTwo hover:bg-secondaryOne transition px-4 py-3 w-full rounded-md text-white font-bold mt-4 shadow-md">
