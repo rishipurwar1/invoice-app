@@ -38,6 +38,7 @@ const CreateInvoice = ({ openForm, setOpenForm, invoice }) => {
 
   // submit handler
   const onSubmit = async (data, status) => {
+    // console.log(data);
     if (invoice) {
       await dispatch(updateInvoice(invoice._id, data));
       setOpenForm(!openForm);
