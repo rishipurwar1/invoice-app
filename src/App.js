@@ -1,16 +1,21 @@
+import React from "react";
 import "./App.css";
 import "./assets/output.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { getInvoices } from "./actions/invoices";
+import Sidebar from "./components/layouts/Sidebar";
 
 // custom components
-import Dashboard from "./components/dashboard/Dashboard";
-import Sidebar from "./components/layouts/Sidebar";
-import CreateInvoice from "./components/invoice/CreateInvoice";
-import InvoiceDetails from "./components/invoice/InvoiceDetails";
-import Auth from "./components/authForm/Auth";
+const Dashboard = React.lazy(() => import("./components/dashboard/Dashboard"));
+const CreateInvoice = React.lazy(() =>
+  import("./components/invoice/CreateInvoice")
+);
+const InvoiceDetails = React.lazy(() =>
+  import("./components/invoice/InvoiceDetails")
+);
+const Auth = React.lazy(() => import("./components/authForm/Auth"));
 
 function App() {
   const dispatch = useDispatch();
@@ -23,11 +28,12 @@ function App() {
       <div className="App grid grid-cols-1 md:grid-cols-body grid-rows-mobile md:grid-rows-1 gap-16 md:gap-0 bg-primaryTwo font-display">
         <Sidebar />
         <Switch>
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/create" component={CreateInvoice} />
-          {/* <Route path="/edit/:id" component={UpdateInvoice} /> */}
-          <Route path="/invoice/:id" component={InvoiceDetails} />
-          <Route path="/auth" component={Auth} />
+          <Suspense fallback={<div>Loading..</div>}>
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/create" component={CreateInvoice} />
+            <Route path="/invoice/:id" component={InvoiceDetails} />
+            <Route path="/auth" component={Auth} />
+          </Suspense>
         </Switch>
       </div>
     </Router>
