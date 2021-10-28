@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import backIcon from "../../assets/images/icon-arrow-left.svg";
 import InvoiceDetailsHeader from "./InvoiceDetailsHeader";
 import { useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import InvoiceFooter from "./InvoiceFooter";
 
 const InvoiceDetails = (props) => {
   const [invoiceData, setInvoiceData] = useState([]);
-  const id = props.match.params.id;
+  const { id } = useParams();
 
   const invoice = useSelector((state) =>
     state.invoices.find((invoice) => invoice._id === id)

@@ -29,10 +29,18 @@ function App() {
         <Sidebar />
         <Switch>
           <Suspense fallback={<div>Loading..</div>}>
-            <Route exact path="/" component={Dashboard} />
-            <Route path="/create" component={CreateInvoice} />
-            <Route path="/invoice/:id" component={InvoiceDetails} />
-            <Route path="/auth" component={Auth} />
+            <Route exact path="/">
+              <Dashboard />
+            </Route>
+            <Route path="/create">
+              <CreateInvoice />
+            </Route>
+            <Route path="/invoice/:id">
+              <InvoiceDetails />
+            </Route>
+            <Route path="/auth">
+              <Auth />
+            </Route>
           </Suspense>
         </Switch>
       </div>
