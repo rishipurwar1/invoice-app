@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
 
 const Label = ({ labelName }) => {
-    return (
-        <label className="text-neutral block font-extralight text-xs pt-5 pb-2" htmlFor="streetAddress">{labelName}</label>
-    )
-}
+  return (
+    <label
+      className="text-neutral block font-extralight text-xs pt-5 pb-2"
+      htmlFor={labelName}
+    >
+      {labelName}
+    </label>
+  );
+};
 
-export default Label
+export default Label;
