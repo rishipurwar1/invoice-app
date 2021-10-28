@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import "./assets/output.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, Suspense } from "react";
 import { getInvoices } from "./actions/invoices";
 import Sidebar from "./components/layouts/Sidebar";
@@ -19,6 +19,7 @@ const Auth = React.lazy(() => import("./components/authForm/Auth"));
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.authData);
 
   useEffect(() => {
     dispatch(getInvoices());
@@ -29,10 +30,18 @@ function App() {
         <Sidebar />
         <Switch>
           <Suspense fallback={<div>Loading..</div>}>
-            <Route exact path="/" component={Dashboard} />
-            <Route path="/create" component={CreateInvoice} />
-            <Route path="/invoice/:id" component={InvoiceDetails} />
-            <Route path="/auth" component={Auth} />
+            <Route exact path="/">
+              <Dashboard />
+            </Route>
+            <Route path="/create">
+              <CreateInvoice />
+            </Route>
+            <Route path="/invoice/:id">
+              <InvoiceDetails />
+            </Route>
+            <Route path="/auth">
+              <Auth />
+            </Route>
           </Suspense>
         </Switch>
       </div>
