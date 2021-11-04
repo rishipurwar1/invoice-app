@@ -54,7 +54,7 @@ const Auth = () => {
     <section className="col-start-1 col-end-2 md:col-start-2 md:col-end-3 row-start-2 row-end-3 md:row-start-1 md:row-end-2 mx-3 sm:mx-0 md:my-auto">
       <div className=" w-full max-w-md bg-primaryOne px-6 py-8 rounded-md shadow-md mx-auto">
         <FormProvider {...formMethods}>
-          <form className="" onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="w-full flex justify-around mb-2">
               <button
                 className={`${
