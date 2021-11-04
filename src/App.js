@@ -1,8 +1,13 @@
 import React from "react";
 import "./App.css";
 import "./assets/output.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, Suspense } from "react";
 import { getInvoices } from "./actions/invoices";
 import Sidebar from "./components/layouts/Sidebar";
@@ -19,6 +24,7 @@ const Auth = React.lazy(() => import("./components/authForm/Auth"));
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.authData);
 
   useEffect(() => {
     dispatch(getInvoices());
@@ -39,7 +45,7 @@ function App() {
               <InvoiceDetails />
             </Route>
             <Route path="/auth">
-              <Auth />
+              {user?.message || !user ? <Auth /> : <Redirect to="/" />}
             </Route>
           </Suspense>
         </Switch>
