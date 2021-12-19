@@ -7,12 +7,18 @@ import { paidInvoice } from "../../actions/invoices";
 const InvoiceFooter = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
   const [openForm, setOpenForm] = useState(false);
+  let id = "";
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
 
+  if (user?.result?.googleId) {
+    id = user?.result?.googleId;
+  } else {
+    id = user?.result?._id;
+  }
   return (
     <div className="block md:hidden mt-6">
-      {user && user?.result?._id === data[0]?.creator ? (
+      {user?.result && id === data[0]?.creator ? (
         <div className="flex justify-end bg-primaryOne p-6">
           <button
             className="text-white text-xs font-bold px-6 py-4 rounded-full bg-borderOne transition bg-borderOne hover:bg-gray-200 hover:text-borderOne"
