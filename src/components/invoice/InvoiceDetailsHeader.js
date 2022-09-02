@@ -3,6 +3,7 @@ import CreateInvoice from "./CreateInvoice";
 import { useDispatch } from "react-redux";
 import { paidInvoice } from "../../actions/invoices";
 import DeleteModal from "../utils/DeleteModal";
+import { capitalizeFirstLetter } from "../utils/utils";
 
 const InvoiceDetailsHeader = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
@@ -13,7 +14,7 @@ const InvoiceDetailsHeader = ({ data }) => {
 
   let badgeClass = "";
   let dotClass = "";
-  switch (data.length > 0 && data[0].status) {
+  switch (data[0]?.status) {
     case "pending":
       badgeClass = "bg-badgeBgTwo text-badgeTwo";
       dotClass = "bg-badgeTwo";
@@ -36,10 +37,7 @@ const InvoiceDetailsHeader = ({ data }) => {
               className={`${badgeClass} ml-4 flex items-center w-28 p-4 rounded-lg shadow-sm`}
             >
               <div className={`${dotClass} h-2 w-2 rounded-full mr-2`}></div>
-              <small>
-                {data[0].status.charAt(0).toUpperCase() +
-                  data[0].status.slice(1)}
-              </small>
+              <small>{capitalizeFirstLetter(data[0]?.status)}</small>
             </div>
           </div>
           {user?.result?._id === data[0]?.creator ? (

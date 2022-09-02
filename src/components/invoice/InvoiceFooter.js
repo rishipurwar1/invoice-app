@@ -3,6 +3,9 @@ import DeleteModal from "../utils/DeleteModal";
 import CreateInvoice from "./CreateInvoice";
 import { useDispatch } from "react-redux";
 import { paidInvoice } from "../../actions/invoices";
+import InvoicePDF from "../invoicePDF/InvoicePDF";
+import { pdf } from "@react-pdf/renderer";
+import { saveAs } from "file-saver";
 
 const InvoiceFooter = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
@@ -16,10 +19,23 @@ const InvoiceFooter = ({ data }) => {
   } else {
     id = user?.result?._id;
   }
+
   return (
-    <div className="block md:hidden mt-6">
+    <div className=" mt-6">
+      <button
+        className="w-full text-white text-sm font-bold px-6 py-4 rounded-full transition bg-borderOne hover:bg-gray-200 hover:text-borderOne"
+        onClick={async () => {
+          const doc = <InvoicePDF data={data[0]} />;
+          const asPdf = pdf([]);
+          asPdf.updateContainer(doc);
+          const blob = await asPdf.toBlob();
+          saveAs(blob, "invoice.pdf");
+        }}
+      >
+        Download Invoice
+      </button>
       {user?.result && id === data[0]?.creator ? (
-        <div className="flex justify-end bg-primaryOne p-6">
+        <div className="flex md:hidden justify-end bg-primaryOne p-6">
           <button
             className="text-white text-xs font-bold px-6 py-4 rounded-full bg-borderOne transition bg-borderOne hover:bg-gray-200 hover:text-borderOne"
             onClick={() => setOpenForm(!openForm)}

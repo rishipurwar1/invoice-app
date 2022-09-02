@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import { formatDate, getSubstring } from "../utils/utils";
 
 const InvoiceCardDetails = ({ data }) => {
   if (data.length > 0) {
@@ -9,7 +9,7 @@ const InvoiceCardDetails = ({ data }) => {
           <div>
             <h1 className="text-white text-base font-bold">
               <span className="text-secondaryThree">#</span>
-              {data[0]._id.substring(data[0]._id.length - 6)}
+              {getSubstring(data[0]._id, 6)}
             </h1>
             <small className="text-neutral text-xs">
               {data[0].description}
@@ -31,13 +31,13 @@ const InvoiceCardDetails = ({ data }) => {
             <div>
               <small className="text-neutral text-xs">Invoice Date</small>
               <h2 className="text-sm text-white font-bold">
-                {moment(data[0].invoiceDate).format("MMM Do YY")}
+                {formatDate(data[0].invoiceDate)}
               </h2>
             </div>
             <div className="mt-5">
               <small className="text-neutral text-xs">Payment Due</small>
               <h2 className="text-sm text-white font-bold">
-                {moment(data[0].paymentDue).format("MMM Do YY")}
+                {formatDate(data[0].paymentDue)}
               </h2>
             </div>
           </div>
@@ -102,7 +102,9 @@ const InvoiceCardDetails = ({ data }) => {
             </tbody>
             <tfoot className="bg-black text-neutral">
               <tr>
-                <td className="py-8 pl-6 font-bold text-xs">Amount Due</td>
+                <td className="py-8 pl-6 font-bold text-xs">{`Amount ${
+                  data[0].status === "paid" ? "Paid" : "Due"
+                }`}</td>
                 <td></td>
                 <td></td>
                 <td className="text-right pr-6 text-2xl font-bold">
