@@ -2,7 +2,7 @@
 
 Invoice App is the easiest way to create professional invoices and estimates for your customers. Users can create, read, update, and delete invoices. Users can also filter invoices by status ​​(draft/pending/paid).
 
-![Homepage](src/assets/images/photo-one.png)
+![Homepage](https://i.imgur.com/GigzqLc.png)
 
 ## Features
 
