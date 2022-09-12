@@ -14,6 +14,7 @@ const Dropdown = () => {
 
   const handleOnChange = (position) => {
     options.forEach((option, index) => {
+      console.log(position, index);
       if (position === index) {
         if (option.checked) {
           option.checked = false;
@@ -39,6 +40,7 @@ const Dropdown = () => {
       {showFilter && (
         <ul className="absolute top-14 -left-5 shadow-xl bg-primaryOne rounded-md py-5 pb-2 px-6 transition">
           {options.map(({ name, value, checked }, index) => {
+            console.log(checked);
             return (
               <div key={index}>
                 <li className="flex mb-3">
