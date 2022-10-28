@@ -19,7 +19,7 @@ Invoice App is the easiest way to create professional invoices and estimates for
 
 Try out the website : [Invoice App](https://invoice-app-sand.vercel.app/)
 
-Try out the API: [Invoice API](https://invoice-app-production.up.railway.app/invoices)
+Try out the API: [Invoice API](https://invoice-api-production-1144.up.railway.app/invoices)
 
 ## 👨‍🔧 Tech Stack
 
